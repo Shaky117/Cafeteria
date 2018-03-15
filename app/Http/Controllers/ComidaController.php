@@ -24,9 +24,11 @@ class ComidaController extends Controller
         $argumentos = array();
 
         $exito = $request->input('exito');
+        $borrado = $request->input('borrado');
 
         $argumentos["comidas"] = $comidas;
         $argumentos["exito"] = $exito;
+        $argumentos["borrado"] = $borrado;
         return view("comidas.index", $argumentos);
     
     }
@@ -83,11 +85,14 @@ class ComidaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         $comida = \App\Comida::find($id);
+        $exito = $request->input('exito');
+
         $argumentos = array();
         $argumentos['comida'] = $comida;
+        $argumentos['exito'] = $exito;
 
         return view('comidas.edit', $argumentos);
     }
@@ -101,7 +106,23 @@ class ComidaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $comida = \App\Comida::find($id);
+        $comida->nombre = $request->input('txtNombre');
+        $comida->precio = $request->input('txtPrecio');
+
+        $respuesta = array();
+        $respuesta["exito"] = false;
+
+        $comida->save();
+
+        if($comida->save()){
+            $respuesta ["exito"] = true;
+        }
+
+        $parametros = array();
+        $parametros["comidas"] = $id;
+        $parametros["exito"] = true;
+        return redirect()->route('comidas.edit', $parametros);
     }
 
     /**
@@ -112,6 +133,15 @@ class ComidaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $comida = \App\Comida::find($id);
+       
+        $resultado = array();
+        $resultado["borrado"] = false;
+
+        if($comida->delete()){
+            $resultado["borrado"] = true;
+        }
+
+        return redirect()->route('comidas.index', $resultado);
     }
 }

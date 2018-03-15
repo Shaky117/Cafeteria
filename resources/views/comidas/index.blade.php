@@ -1,12 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
+@extends('layouts.default')
+@section('content')
     <h1>Comidas</h1>
     @if($exito != null)
         @if($exito == 1)
@@ -15,6 +8,15 @@
             <p>No se ha podido agregar una comida</p>
         @endif
     @endif
+    @if($borrado != null)
+        @if($borrado == 1)
+            <p>Se ha borrado una comida</p>
+        @else   
+            <p>No se ha podido borrar una comida</p>
+        @endif
+    @endif
+
+
     <a href="{{route('comidas.create')}}">
         <button>Agregar comida</button>
     </a>
@@ -32,10 +34,13 @@
                 <tr>
                     <td>{{$comida->nombre}}</td>
                     <td>{{$comida->precio}}</td>
-                    <td><button>Editar</button></td>
+                    <td>
+                        <a href="{{route('comidas.edit', $comida->id)}}">
+                            <button>Editar</button>
+                        </a>
+                    </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
-</body>
-</html>
+@endsection
