@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 01-03-2018 a las 00:33:46
+-- Tiempo de generación: 21-03-2018 a las 23:14:25
 -- Versión del servidor: 5.6.38
 -- Versión de PHP: 7.2.1
 
@@ -29,15 +29,17 @@ SET time_zone = "+00:00";
 CREATE TABLE `comidas` (
   `id` int(11) NOT NULL,
   `nombre` varchar(255) NOT NULL,
-  `precio` decimal(6,2) NOT NULL
+  `precio` decimal(6,2) NOT NULL,
+  `descripcion` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `comidas`
 --
 
-INSERT INTO `comidas` (`id`, `nombre`, `precio`) VALUES
-(1, 'Orden de burritos', '22.00');
+INSERT INTO `comidas` (`id`, `nombre`, `precio`, `descripcion`) VALUES
+(1, 'Orden de burritos', '22.00', ''),
+(3, 'Coca ', '13.00', 'Una coca bien helada');
 
 -- --------------------------------------------------------
 
@@ -125,7 +127,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `comidas`
 --
 ALTER TABLE `comidas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
