@@ -25,6 +25,7 @@
             <tr>
                 <th>Nombre</th>
                 <th>Precio</th>
+                <th>Descripcion</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -34,6 +35,7 @@
                 <tr>
                     <td>{{$comida->nombre}}</td>
                     <td>{{$comida->precio}}</td>
+                    <td>{{$comida->descripcion}}</td>
                     <td>
                         <a href="{{route('comidas.edit', $comida->id)}}">
                             <button>Editar</button>
